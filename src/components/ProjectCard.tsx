@@ -18,6 +18,10 @@ interface ProjectCardProps {
   onPreview: (content: PreviewContent) => void;
 }
 
+function getUiSamples(project: Project): string[] {
+  return project.uiSamples ?? [];
+}
+
 function buildMetaLine(project: Project): string {
   const parts = [project.company];
   if (project.type === 'internal-product') parts.push('Internal product');
@@ -133,91 +137,76 @@ function LinkPreview({
 }
 
 function UiSamplePreview({
-  project,
+  samples,
+  projectName,
   onPreview,
-  compact = false,
+  fillCard = false,
 }: {
-  project: Project;
+  samples: string[];
+  projectName: string;
   onPreview: (content: PreviewContent) => void;
-  compact?: boolean;
+  fillCard?: boolean;
 }) {
-  if (!project.uiSample) return null;
-
-  if (compact) {
-    return (
-      <button
-        type="button"
-        onClick={() =>
-          onPreview({
-            kind: 'image',
-            src: project.uiSample!,
-            title: `${project.name} — UI Sample`,
-          })
-        }
-        className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left p-1.5"
-      >
-        <img
-          src={project.uiSample}
-          alt={`${project.name} UI sample`}
-          className="w-full max-h-24 sm:max-h-28 object-contain object-top mx-auto"
-        />
-        <p className="mt-1 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
-      </button>
-    );
-  }
+  if (samples.length === 0) return null;
 
   return (
-    <button
-      type="button"
-      onClick={() =>
-        onPreview({
-          kind: 'image',
-          src: project.uiSample!,
-          title: `${project.name} — UI Sample`,
-        })
-      }
-      className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left p-3"
+    <div
+      className={`w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all ${
+        fillCard ? 'flex-1 flex flex-col min-h-0' : ''
+      }`}
     >
-      <img
-        src={project.uiSample}
-        alt={`${project.name} UI sample`}
-        className="w-full max-h-36 sm:max-h-44 object-contain object-top mx-auto"
-      />
-      <p className="mt-2 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
-    </button>
+      <div
+        className={`relative w-full overflow-hidden ${
+          fillCard ? 'flex-1 min-h-48' : 'aspect-video'
+        } ${samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800 h-full' : ''}`}
+      >
+        {samples.map((src, index) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() =>
+              onPreview({
+                kind: 'image',
+                src,
+                title: `${projectName} — UI Sample ${samples.length > 1 ? index + 1 : ''}`.trim(),
+              })
+            }
+            className="relative h-full w-full overflow-hidden group"
+          >
+            <img
+              src={src}
+              alt={`${projectName} UI sample ${index + 1}`}
+              className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+            />
+          </button>
+        ))}
+      </div>
+      <p className="py-1.5 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
+    </div>
   );
 }
 
 export function ProjectCard({ project, onPreview }: ProjectCardProps) {
+  const uiSamples = getUiSamples(project);
   const hasLinks = project.links && project.links.length > 0;
-  const isUiOnly = !!project.uiSample && !hasLinks;
+  const isUiOnly = uiSamples.length > 0 && !hasLinks;
   const websiteLinks = project.links?.filter((l) => ['website', 'facebook', 'other'].includes(l.type)) ?? [];
   const mediaLinks = project.links?.filter((l) => !['website', 'facebook', 'other'].includes(l.type)) ?? [];
-  const hasMediaSection = !!project.uiSample || hasLinks;
+  const hasMediaSection = uiSamples.length > 0 || hasLinks;
 
   return (
-    <article
-      className={`flex flex-col bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden ${
-        isUiOnly ? 'self-start w-full' : ''
-      }`}
-    >
-      <div className={`flex flex-col ${isUiOnly ? 'p-4 sm:p-5' : 'flex-grow p-5 sm:p-6'}`}>
-        <div className={isUiOnly ? 'mb-2' : 'mb-3'}>
+    <article className="flex flex-col h-full bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden">
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
+        <div className="mb-3">
           <h3 className="text-lg sm:text-xl font-bold text-gray-100 group-hover:text-cyan-400 transition-colors leading-tight mb-1">
             {project.name}
           </h3>
           <p className="text-xs text-gray-500">{buildMetaLine(project)}</p>
         </div>
 
-        <p
-          className={`text-gray-300 text-sm leading-relaxed ${
-            isUiOnly ? 'mb-2' : 'mb-4 flex-grow'
-          }`}
-        >
-          {project.description}
-        </p>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
 
-        <div className={`flex flex-wrap gap-2 ${isUiOnly ? 'mb-2' : 'mb-4'}`}>
+        <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag) => (
             <Badge key={tag} className="bg-blue-500/10 border-blue-500/20 text-blue-300">
               {tag}
@@ -227,11 +216,9 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
 
         {hasMediaSection && (
           <div
-            className={
-              isUiOnly
-                ? 'space-y-2'
-                : 'mt-auto pt-4 border-t border-gray-800/60 space-y-3'
-            }
+            className={`mt-auto pt-4 border-t border-gray-800/60 space-y-3 ${
+              isUiOnly ? 'flex-1 flex flex-col min-h-0' : ''
+            }`}
           >
             {websiteLinks.length > 0 && (
               <div className="flex flex-wrap gap-2">
@@ -241,11 +228,12 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
               </div>
             )}
 
-            {project.uiSample && (
+            {uiSamples.length > 0 && (
               <UiSamplePreview
-                project={project}
+                samples={uiSamples}
+                projectName={project.name}
                 onPreview={onPreview}
-                compact={isUiOnly}
+                fillCard={isUiOnly}
               />
             )}
 

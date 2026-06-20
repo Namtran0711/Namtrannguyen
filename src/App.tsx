@@ -186,7 +186,7 @@ export default function App() {
           )}
 
           {activeTab === 'projects' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in">
               {PROJECTS.map((project) => (
                 <ProjectCard key={project.id} project={project} onPreview={setPreview} />
               ))}

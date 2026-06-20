@@ -18,7 +18,7 @@ export interface Project {
   type: ProjectType;
   status: ProjectStatus;
   links?: ProjectLink[];
-  uiSample?: string;
+  uiSamples?: string[];
 }
 
 export const PROFILE = {
@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
     description:
       'An internal system turning staff into brand KOLs, featuring AI-generated post ideas, sentiment analysis, and affiliate gamification.',
     tags: ['AI Content', 'Sentiment Analysis', 'Gamification', 'Affiliate'],
-    uiSample: '/assets/projects/advocacy.png',
+    uiSamples: ['/assets/projects/advocacy.png'],
   },
   {
     id: 3,
@@ -142,7 +142,7 @@ export const PROJECTS: Project[] = [
       'A private data storage for business. Collecting and analyzing business requirements, creating structured documentation and functional specifications.',
     tags: ['Data Storage', 'Business'],
     links: [{ label: 'Consultation', url: 'https://vcyber.vn/lien-he', type: 'website' }],
-    uiSample: '/assets/projects/oka.png',
+    uiSamples: ['/assets/projects/oka.png'],
   },
   {
     id: 5,
@@ -154,7 +154,7 @@ export const PROJECTS: Project[] = [
       'A national traceability system utilizing QR codes to trace millions of products.',
     tags: ['Government', 'QR Traceability', 'Large Scale'],
     links: [{ label: 'Access', url: 'https://elabel.gov.vn/', type: 'website' }],
-    uiSample: '/assets/projects/elabel.png',
+    uiSamples: ['/assets/projects/elabel-mobile.png', '/assets/projects/elabel-admin.png'],
   },
   {
     id: 6,
