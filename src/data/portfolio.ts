@@ -108,6 +108,30 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: 4,
+    name: 'OKA Private Data Storage',
+    company: 'V-Cyber',
+    type: 'product',
+    status: 'coming-soon',
+    description:
+      'A private data storage for business. Collecting and analyzing business requirements, creating structured documentation and functional specifications.',
+    tags: ['Data Storage', 'Business'],
+    links: [{ label: 'Consultation', url: 'https://vcyber.vn/lien-he', type: 'website' }],
+    uiSamples: ['/assets/projects/oka.png'],
+  },
+  {
+    id: 5,
+    name: 'VN National E-label System',
+    company: 'V-Cyber',
+    type: 'product',
+    status: 'active',
+    description:
+      'A national traceability system utilizing QR codes to trace millions of products.',
+    tags: ['Government', 'QR Traceability', 'Large Scale'],
+    links: [{ label: 'Access', url: 'https://elabel.gov.vn/', type: 'website' }],
+    uiSamples: ['/assets/projects/elabel-home.png'],
+  },
+  {
     id: 2,
     name: 'Employee Advocacy System',
     company: 'Yeah1 Game',
@@ -131,30 +155,6 @@ export const PROJECTS: Project[] = [
       { label: 'Detail info', url: 'https://www.facebook.com/GameThuToanNang', type: 'facebook' },
       { label: 'Demo video', url: 'https://www.tiktok.com/@gamethutoannang/video/7510482388129041665', type: 'tiktok' },
     ],
-  },
-  {
-    id: 4,
-    name: 'OKA Private Data Storage',
-    company: 'V-Cyber',
-    type: 'product',
-    status: 'coming-soon',
-    description:
-      'A private data storage for business. Collecting and analyzing business requirements, creating structured documentation and functional specifications.',
-    tags: ['Data Storage', 'Business'],
-    links: [{ label: 'Consultation', url: 'https://vcyber.vn/lien-he', type: 'website' }],
-    uiSamples: ['/assets/projects/oka.png'],
-  },
-  {
-    id: 5,
-    name: 'VN National E-label System',
-    company: 'V-Cyber',
-    type: 'product',
-    status: 'active',
-    description:
-      'A national traceability system utilizing QR codes to trace millions of products.',
-    tags: ['Government', 'QR Traceability', 'Large Scale'],
-    links: [{ label: 'Access', url: 'https://elabel.gov.vn/', type: 'website' }],
-    uiSamples: ['/assets/projects/elabel-mobile.png', '/assets/projects/elabel-admin.png'],
   },
   {
     id: 6,

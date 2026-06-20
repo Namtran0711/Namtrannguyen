@@ -140,25 +140,19 @@ function UiSamplePreview({
   samples,
   projectName,
   onPreview,
-  fillCard = false,
 }: {
   samples: string[];
   projectName: string;
   onPreview: (content: PreviewContent) => void;
-  fillCard?: boolean;
 }) {
   if (samples.length === 0) return null;
 
   return (
-    <div
-      className={`w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all ${
-        fillCard ? 'flex-1 flex flex-col min-h-0' : ''
-      }`}
-    >
+    <div className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all">
       <div
-        className={`relative w-full overflow-hidden ${
-          fillCard ? 'flex-1 min-h-48' : 'aspect-video'
-        } ${samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800 h-full' : ''}`}
+        className={`relative w-full aspect-video overflow-hidden ${
+          samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800' : ''
+        }`}
       >
         {samples.map((src, index) => (
           <button
@@ -215,11 +209,9 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
         </div>
 
         {hasMediaSection && (
-          <div
-            className={`mt-auto pt-4 border-t border-gray-800/60 space-y-3 ${
-              isUiOnly ? 'flex-1 flex flex-col min-h-0' : ''
-            }`}
-          >
+          <div className="mt-auto pt-4 border-t border-gray-800/60 space-y-3">
+            {isUiOnly && <div className="h-[34px]" aria-hidden="true" />}
+
             {websiteLinks.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {websiteLinks.map((link) => (
@@ -233,7 +225,6 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
                 samples={uiSamples}
                 projectName={project.name}
                 onPreview={onPreview}
-                fillCard={isUiOnly}
               />
             )}
 
