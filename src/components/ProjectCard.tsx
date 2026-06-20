@@ -27,6 +27,20 @@ function buildMetaLine(project: Project): string {
   return parts.join(' · ');
 }
 
+function HighlightLink({ link }: { link: ProjectLink }) {
+  return (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/40 hover:bg-cyan-500/25 hover:text-cyan-300 hover:border-cyan-400/60 transition-all shadow-sm shadow-cyan-500/10"
+    >
+      {link.label}
+      <ExternalLink className="w-3 h-3" />
+    </a>
+  );
+}
+
 function SubtleLink({ link }: { link: ProjectLink }) {
   return (
     <a
@@ -115,7 +129,7 @@ function LinkPreview({
     );
   }
 
-  return <SubtleLink link={link} />;
+  return <HighlightLink link={link} />;
 }
 
 function UiSamplePreview({
@@ -129,6 +143,29 @@ function UiSamplePreview({
 }) {
   if (!project.uiSample) return null;
 
+  if (compact) {
+    return (
+      <button
+        type="button"
+        onClick={() =>
+          onPreview({
+            kind: 'image',
+            src: project.uiSample!,
+            title: `${project.name} — UI Sample`,
+          })
+        }
+        className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left p-1.5"
+      >
+        <img
+          src={project.uiSample}
+          alt={`${project.name} UI sample`}
+          className="w-full max-h-24 sm:max-h-28 object-contain object-top mx-auto"
+        />
+        <p className="mt-1 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
+      </button>
+    );
+  }
+
   return (
     <button
       type="button"
@@ -139,16 +176,12 @@ function UiSamplePreview({
           title: `${project.name} — UI Sample`,
         })
       }
-      className={`w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left ${
-        compact ? 'p-2' : 'p-3'
-      }`}
+      className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left p-3"
     >
       <img
         src={project.uiSample}
         alt={`${project.name} UI sample`}
-        className={`w-full object-contain object-top mx-auto ${
-          compact ? 'max-h-28 sm:max-h-32' : 'max-h-36 sm:max-h-44'
-        }`}
+        className="w-full max-h-36 sm:max-h-44 object-contain object-top mx-auto"
       />
       <p className="mt-2 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
     </button>
@@ -157,23 +190,34 @@ function UiSamplePreview({
 
 export function ProjectCard({ project, onPreview }: ProjectCardProps) {
   const hasLinks = project.links && project.links.length > 0;
+  const isUiOnly = !!project.uiSample && !hasLinks;
   const websiteLinks = project.links?.filter((l) => ['website', 'facebook', 'other'].includes(l.type)) ?? [];
   const mediaLinks = project.links?.filter((l) => !['website', 'facebook', 'other'].includes(l.type)) ?? [];
   const hasMediaSection = !!project.uiSample || hasLinks;
 
   return (
-    <article className="flex flex-col bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden">
-      <div className="flex flex-col flex-grow p-5 sm:p-6">
-        <div className="mb-3">
+    <article
+      className={`flex flex-col bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden ${
+        isUiOnly ? 'self-start w-full' : ''
+      }`}
+    >
+      <div className={`flex flex-col ${isUiOnly ? 'p-4 sm:p-5' : 'flex-grow p-5 sm:p-6'}`}>
+        <div className={isUiOnly ? 'mb-2' : 'mb-3'}>
           <h3 className="text-lg sm:text-xl font-bold text-gray-100 group-hover:text-cyan-400 transition-colors leading-tight mb-1">
             {project.name}
           </h3>
           <p className="text-xs text-gray-500">{buildMetaLine(project)}</p>
         </div>
 
-        <p className="text-gray-300 text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
+        <p
+          className={`text-gray-300 text-sm leading-relaxed ${
+            isUiOnly ? 'mb-2' : 'mb-4 flex-grow'
+          }`}
+        >
+          {project.description}
+        </p>
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className={`flex flex-wrap gap-2 ${isUiOnly ? 'mb-2' : 'mb-4'}`}>
           {project.tags.map((tag) => (
             <Badge key={tag} className="bg-blue-500/10 border-blue-500/20 text-blue-300">
               {tag}
@@ -182,11 +226,17 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
         </div>
 
         {hasMediaSection && (
-          <div className="mt-auto pt-4 border-t border-gray-800/60 space-y-3">
+          <div
+            className={
+              isUiOnly
+                ? 'space-y-2'
+                : 'mt-auto pt-4 border-t border-gray-800/60 space-y-3'
+            }
+          >
             {websiteLinks.length > 0 && (
-              <div className="flex flex-wrap gap-x-4 gap-y-1">
+              <div className="flex flex-wrap gap-2">
                 {websiteLinks.map((link) => (
-                  <SubtleLink key={link.url} link={link} />
+                  <HighlightLink key={link.url} link={link} />
                 ))}
               </div>
             )}
@@ -195,7 +245,7 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
               <UiSamplePreview
                 project={project}
                 onPreview={onPreview}
-                compact={!hasLinks && !!project.uiSample}
+                compact={isUiOnly}
               />
             )}
 

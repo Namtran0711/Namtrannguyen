@@ -186,7 +186,7 @@ export default function App() {
           )}
 
           {activeTab === 'projects' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in items-start">
               {PROJECTS.map((project) => (
                 <ProjectCard key={project.id} project={project} onPreview={setPreview} />
               ))}
@@ -259,24 +259,23 @@ export default function App() {
         </main>
 
         <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
               href={getGmailComposeUrl(PROFILE.email)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-gray-300 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/40 hover:bg-cyan-500/25 hover:text-cyan-300 hover:border-cyan-400/60 transition-all shadow-sm shadow-cyan-500/10"
             >
-              <Mail className="w-3.5 h-3.5 opacity-60" />
+              <Mail className="w-4 h-4" />
               Get in touch
             </a>
-            <span className="hidden sm:inline text-gray-700">·</span>
             <a
               href={PROFILE.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-gray-300 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-blue-400 bg-blue-500/15 border border-blue-500/40 hover:bg-blue-500/25 hover:text-blue-300 hover:border-blue-400/60 transition-all shadow-sm shadow-blue-500/10"
             >
-              <Linkedin className="w-3.5 h-3.5 opacity-60" />
+              <Linkedin className="w-4 h-4" />
               {PROFILE.linkedin}
             </a>
           </div>
