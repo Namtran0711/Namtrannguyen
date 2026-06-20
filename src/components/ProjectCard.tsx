@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import {
-  ChevronDown,
-  ChevronRight,
   ExternalLink,
   Eye,
-  ImageIcon,
   Link2,
   Lock,
   Play,
@@ -147,10 +143,7 @@ function LinkPreview({
 }
 
 export function ProjectCard({ project, onPreview }: ProjectCardProps) {
-  const [linksOpen, setLinksOpen] = useState(false);
   const hasLinks = project.links && project.links.length > 0;
-  const hasExpandableContent =
-    hasLinks || !!project.uiSample;
 
   return (
     <article className="flex flex-col bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden">
@@ -213,48 +206,11 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
           </div>
         )}
 
-        {hasExpandableContent && (
-          <div className="mt-auto pt-2 border-t border-gray-800/80">
-            <button
-              type="button"
-              onClick={() => setLinksOpen((v) => !v)}
-              className="flex items-center justify-between w-full py-2.5 px-1 text-sm text-gray-400 hover:text-cyan-400 transition-colors"
-              aria-expanded={linksOpen}
-            >
-              <span className="inline-flex items-center gap-2">
-                <Link2 className="w-4 h-4" />
-                {linksOpen ? 'Hide links & media' : 'Show links & media'}
-              </span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${linksOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-
-            {linksOpen && (
-              <div className="space-y-3 pt-2 pb-1 animate-slide-up">
-                {project.uiSample && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onPreview({
-                        kind: 'image',
-                        src: project.uiSample!,
-                        title: `${project.name} — UI Sample`,
-                      })
-                    }
-                    className="flex items-center gap-3 w-full px-4 py-3 rounded-lg bg-gray-800/60 border border-gray-700 hover:border-cyan-500/40 transition-all text-left group/link"
-                  >
-                    <ImageIcon className="w-4 h-4 text-gray-500 group-hover/link:text-cyan-400" />
-                    <span className="text-sm text-gray-300">View full UI sample</span>
-                    <ChevronRight className="w-4 h-4 ml-auto text-gray-600 group-hover/link:text-cyan-400" />
-                  </button>
-                )}
-
-                {project.links?.map((link) => (
-                  <LinkPreview key={link.url} link={link} onPreview={onPreview} />
-                ))}
-              </div>
-            )}
+        {hasLinks && (
+          <div className="mt-auto pt-4 border-t border-gray-800/80 space-y-3">
+            {project.links!.map((link) => (
+              <LinkPreview key={link.url} link={link} onPreview={onPreview} />
+            ))}
           </div>
         )}
       </div>

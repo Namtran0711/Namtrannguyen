@@ -201,6 +201,22 @@ export const REVIEWS: Review[] = [
   },
   {
     id: 3,
+    name: 'Mr Nha Nguyen',
+    position: 'CEO',
+    company: 'V-Cyber',
+    comment:
+      'Nam provides practical analysis for the essential use cases of the product and business.',
+  },
+  {
+    id: 4,
+    name: 'Phi Hung',
+    position: 'Senior Project Manager (ex DXC) · Project Manager',
+    company: 'V-Cyber',
+    comment:
+      'Nam organizes and collaborates with cross-functional teams effectively throughout the development lifecycle.',
+  },
+  {
+    id: 5,
     name: 'Duong Luong',
     position: 'Product Lead (ex MoMo) · Product Manager (ex AppROI) · INSEAD MBA',
     company: 'AppROI',
@@ -208,19 +224,11 @@ export const REVIEWS: Review[] = [
       'Nam is always eager to learn, continuously improves, and adapts well to new environments.',
   },
   {
-    id: 4,
+    id: 6,
     name: 'Hoa Le',
     position: 'Senior Product Owner',
     company: 'ex Zalo',
     comment: 'Nam has a strong sense of product monetization.',
-  },
-  {
-    id: 5,
-    name: 'Phi Hung',
-    position: 'Senior Project Manager (ex DXC) · Project Manager',
-    company: 'V-Cyber',
-    comment:
-      'Nam organizes and collaborates with cross-functional teams effectively throughout the development lifecycle.',
   },
 ];
 
@@ -275,6 +283,10 @@ export const STATUS_LABELS: Record<ProjectStatus, string> = {
   'coming-soon': 'Coming Soon',
   closed: 'Closed',
 };
+
+export function getGmailComposeUrl(email: string): string {
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+}
 
 export function getYoutubeId(url: string): string | null {
   const match = url.match(

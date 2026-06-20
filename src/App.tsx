@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Phone,
   Quote,
+  Send,
   Sparkles,
   Terminal,
 } from 'lucide-react';
@@ -18,6 +19,7 @@ import { MediaPreviewModal, PreviewContent } from './components/MediaPreviewModa
 import { ProjectCard } from './components/ProjectCard';
 import {
   EXPERIENCES,
+  getGmailComposeUrl,
   PROFILE,
   PROJECTS,
   REVIEWS,
@@ -270,8 +272,16 @@ export default function App() {
           )}
         </main>
 
-        <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50 text-center text-gray-500 text-xs sm:text-sm">
-          <p>Built with React & Tailwind CSS. Designed for optimal UX.</p>
+        <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50 text-center">
+          <a
+            href={getGmailComposeUrl(PROFILE.email)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-300 hover:text-white hover:border-cyan-400/60 hover:from-cyan-500/20 hover:to-blue-500/20 transition-all shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/10 text-sm sm:text-base font-medium group"
+          >
+            <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform" />
+            Get in touch — {PROFILE.email}
+          </a>
         </footer>
       </div>
 
