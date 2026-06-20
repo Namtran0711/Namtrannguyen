@@ -5,12 +5,12 @@ import {
   Code,
   Database,
   GraduationCap,
+  Linkedin,
   Mail,
   MapPin,
   MessageSquare,
   Phone,
   Quote,
-  Send,
   Sparkles,
   Terminal,
 } from 'lucide-react';
@@ -186,24 +186,10 @@ export default function App() {
           )}
 
           {activeTab === 'projects' && (
-            <div>
-              <div className="flex flex-wrap items-center gap-3 mb-5 sm:mb-6 text-xs sm:text-sm text-gray-500">
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" /> Product
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-violet-400" /> Internal Product
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Campaign
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in">
-                {PROJECTS.map((project) => (
-                  <ProjectCard key={project.id} project={project} onPreview={setPreview} />
-                ))}
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 animate-fade-in">
+              {PROJECTS.map((project) => (
+                <ProjectCard key={project.id} project={project} onPreview={setPreview} />
+              ))}
             </div>
           )}
 
@@ -272,16 +258,28 @@ export default function App() {
           )}
         </main>
 
-        <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50 text-center">
-          <a
-            href={getGmailComposeUrl(PROFILE.email)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-300 hover:text-white hover:border-cyan-400/60 hover:from-cyan-500/20 hover:to-blue-500/20 transition-all shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/10 text-sm sm:text-base font-medium group"
-          >
-            <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform" />
-            Get in touch — {PROFILE.email}
-          </a>
+        <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500">
+            <a
+              href={getGmailComposeUrl(PROFILE.email)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-gray-300 transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 opacity-60" />
+              Get in touch
+            </a>
+            <span className="hidden sm:inline text-gray-700">·</span>
+            <a
+              href={PROFILE.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-gray-300 transition-colors"
+            >
+              <Linkedin className="w-3.5 h-3.5 opacity-60" />
+              {PROFILE.linkedin}
+            </a>
+          </div>
         </footer>
       </div>
 

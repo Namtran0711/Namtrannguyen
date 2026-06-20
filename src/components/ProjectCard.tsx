@@ -1,8 +1,5 @@
 import {
   ExternalLink,
-  Eye,
-  Link2,
-  Lock,
   Play,
 } from 'lucide-react';
 import { Badge } from './Badge';
@@ -14,8 +11,6 @@ import {
   getYoutubeThumbnail,
   Project,
   ProjectLink,
-  STATUS_LABELS,
-  TYPE_LABELS,
 } from '../data/portfolio';
 
 interface ProjectCardProps {
@@ -23,17 +18,28 @@ interface ProjectCardProps {
   onPreview: (content: PreviewContent) => void;
 }
 
-const TYPE_STYLES = {
-  product: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-300',
-  'internal-product': 'bg-violet-500/10 border-violet-500/30 text-violet-300',
-  campaign: 'bg-amber-500/10 border-amber-500/30 text-amber-300',
-};
+function buildMetaLine(project: Project): string {
+  const parts = [project.company];
+  if (project.type === 'internal-product') parts.push('Internal product');
+  if (project.type === 'campaign') parts.push('Campaign');
+  if (project.status === 'coming-soon') parts.push('Coming soon');
+  if (project.status === 'closed') parts.push('Closed');
+  return parts.join(' · ');
+}
 
-const STATUS_STYLES = {
-  active: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300',
-  'coming-soon': 'bg-orange-500/10 border-orange-500/30 text-orange-300',
-  closed: 'bg-gray-500/10 border-gray-500/40 text-gray-400',
-};
+function SubtleLink({ link }: { link: ProjectLink }) {
+  return (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+    >
+      {link.label}
+      <ExternalLink className="w-3 h-3 opacity-50" />
+    </a>
+  );
+}
 
 function LinkPreview({
   link,
@@ -54,7 +60,7 @@ function LinkPreview({
         onClick={() =>
           onPreview({ kind: 'youtube', videoId: youtubeId, title: `${link.label} — YouTube` })
         }
-        className="group relative w-full overflow-hidden rounded-lg border border-gray-700 hover:border-cyan-500/50 transition-all text-left"
+        className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all text-left"
       >
         <img
           src={youtubeThumb}
@@ -62,13 +68,12 @@ function LinkPreview({
           className="w-full aspect-video object-cover"
         />
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full bg-red-600/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-            <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
+          <div className="w-10 h-10 rounded-full bg-red-600/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <Play className="w-4 h-4 text-white ml-0.5" fill="white" />
           </div>
         </div>
         <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-gradient-to-t from-black/80 to-transparent">
-          <p className="text-xs text-gray-200 font-medium">{link.label}</p>
-          <p className="text-[10px] text-gray-400">Click to play preview</p>
+          <p className="text-[11px] text-gray-300">{link.label}</p>
         </div>
       </button>
     );
@@ -80,22 +85,14 @@ function LinkPreview({
         <button
           type="button"
           onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label })}
-          className="group relative w-full overflow-hidden rounded-lg border border-gray-700 hover:border-cyan-500/50 transition-all"
+          className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
-          <div className="aspect-video bg-gray-800 flex flex-col items-center justify-center gap-2">
-            <Play className="w-10 h-10 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs text-gray-300">{link.label}</span>
-            <span className="text-[10px] text-gray-500">Click to preview clip</span>
+          <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
+            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+            <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>
-        <a
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-cyan-400 transition-colors"
-        >
-          Open in Google Drive <ExternalLink className="w-3 h-3" />
-        </a>
+        <SubtleLink link={link} />
       </div>
     );
   }
@@ -106,86 +103,74 @@ function LinkPreview({
         <button
           type="button"
           onClick={() => onPreview({ kind: 'embed', src: tiktokEmbed, title: link.label })}
-          className="group relative w-full overflow-hidden rounded-lg border border-gray-700 hover:border-cyan-500/50 transition-all"
+          className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
-          <div className="aspect-video bg-gray-800 flex flex-col items-center justify-center gap-2">
-            <Play className="w-10 h-10 text-pink-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs text-gray-300">{link.label}</span>
-            <span className="text-[10px] text-gray-500">Click to preview TikTok</span>
+          <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
+            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+            <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>
-        <a
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-cyan-400 transition-colors"
-        >
-          Open on TikTok <ExternalLink className="w-3 h-3" />
-        </a>
+        <SubtleLink link={link} />
       </div>
     );
   }
 
+  return <SubtleLink link={link} />;
+}
+
+function UiSamplePreview({
+  project,
+  onPreview,
+  compact = false,
+}: {
+  project: Project;
+  onPreview: (content: PreviewContent) => void;
+  compact?: boolean;
+}) {
+  if (!project.uiSample) return null;
+
   return (
-    <a
-      href={link.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-gray-800/60 border border-gray-700 hover:border-cyan-500/40 hover:bg-gray-800 transition-all group"
+    <button
+      type="button"
+      onClick={() =>
+        onPreview({
+          kind: 'image',
+          src: project.uiSample!,
+          title: `${project.name} — UI Sample`,
+        })
+      }
+      className={`w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all text-left ${
+        compact ? 'p-2' : 'p-3'
+      }`}
     >
-      <div className="flex items-center gap-2 min-w-0">
-        <Link2 className="w-4 h-4 text-gray-500 group-hover:text-cyan-400 shrink-0" />
-        <span className="text-sm text-gray-300 truncate">{link.label}</span>
-      </div>
-      <ExternalLink className="w-4 h-4 text-gray-600 group-hover:text-cyan-400 shrink-0" />
-    </a>
+      <img
+        src={project.uiSample}
+        alt={`${project.name} UI sample`}
+        className={`w-full object-contain object-top mx-auto ${
+          compact ? 'max-h-28 sm:max-h-32' : 'max-h-36 sm:max-h-44'
+        }`}
+      />
+      <p className="mt-2 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
+    </button>
   );
 }
 
 export function ProjectCard({ project, onPreview }: ProjectCardProps) {
   const hasLinks = project.links && project.links.length > 0;
+  const websiteLinks = project.links?.filter((l) => ['website', 'facebook', 'other'].includes(l.type)) ?? [];
+  const mediaLinks = project.links?.filter((l) => !['website', 'facebook', 'other'].includes(l.type)) ?? [];
+  const hasMediaSection = !!project.uiSample || hasLinks;
 
   return (
     <article className="flex flex-col bg-gray-900/40 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group overflow-hidden">
-      {project.uiSample && (
-        <button
-          type="button"
-          onClick={() =>
-            onPreview({
-              kind: 'image',
-              src: project.uiSample!,
-              title: `${project.name} — UI Sample`,
-            })
-          }
-          className="relative w-full overflow-hidden border-b border-gray-800"
-        >
-          <img
-            src={project.uiSample}
-            alt={`${project.name} UI sample`}
-            className="w-full h-40 sm:h-48 object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 text-xs text-white backdrop-blur-sm">
-              <Eye className="w-3.5 h-3.5" /> View UI sample
-            </span>
-          </div>
-        </button>
-      )}
-
       <div className="flex flex-col flex-grow p-5 sm:p-6">
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-100 group-hover:text-cyan-400 transition-colors leading-tight">
+        <div className="mb-3">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-100 group-hover:text-cyan-400 transition-colors leading-tight mb-1">
             {project.name}
           </h3>
-          <div className="flex flex-wrap gap-1.5 justify-end">
-            <Badge className={TYPE_STYLES[project.type]}>{TYPE_LABELS[project.type]}</Badge>
-            <Badge className={STATUS_STYLES[project.status]}>
-              {STATUS_LABELS[project.status]}
-            </Badge>
-          </div>
+          <p className="text-xs text-gray-500">{buildMetaLine(project)}</p>
         </div>
 
-        <p className="text-sm text-cyan-500/80 font-medium mb-2">{project.company}</p>
         <p className="text-gray-300 text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
@@ -196,19 +181,25 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
           ))}
         </div>
 
-        {project.status === 'coming-soon' && (
-          <div className="flex items-start gap-2 p-3 mb-4 rounded-lg bg-orange-500/5 border border-orange-500/20">
-            <Lock className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
-            <p className="text-xs text-orange-200/80 leading-relaxed">
-              This project is not publicly accessible yet. UI sample and consultation links are
-              available below.
-            </p>
-          </div>
-        )}
+        {hasMediaSection && (
+          <div className="mt-auto pt-4 border-t border-gray-800/60 space-y-3">
+            {websiteLinks.length > 0 && (
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                {websiteLinks.map((link) => (
+                  <SubtleLink key={link.url} link={link} />
+                ))}
+              </div>
+            )}
 
-        {hasLinks && (
-          <div className="mt-auto pt-4 border-t border-gray-800/80 space-y-3">
-            {project.links!.map((link) => (
+            {project.uiSample && (
+              <UiSamplePreview
+                project={project}
+                onPreview={onPreview}
+                compact={!hasLinks && !!project.uiSample}
+              />
+            )}
+
+            {mediaLinks.map((link) => (
               <LinkPreview key={link.url} link={link} onPreview={onPreview} />
             ))}
           </div>

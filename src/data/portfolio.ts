@@ -28,6 +28,7 @@ export const PROFILE = {
   email: 'trannguyennam.tnn@gmail.com',
   phone: '(+84) 399356368',
   linkedin: 'Tran Nguyen Nam',
+  linkedinUrl: 'https://www.linkedin.com/in/trannguyennam',
   education: 'VNU | UEL - Birmingham City University',
   quote:
     'Welcome to my workspace, where you can capture me, influenced by project/product analysis, and management. I believe I can produce a solution that meets multi-source requirements, system architecture, user experience and more.',
