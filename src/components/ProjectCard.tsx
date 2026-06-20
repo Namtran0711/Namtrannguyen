@@ -175,7 +175,6 @@ function UiSamplePreview({
           </button>
         ))}
       </div>
-      <p className="py-1.5 text-[10px] text-gray-600 text-center">UI sample · click to expand</p>
     </div>
   );
 }
@@ -198,41 +197,48 @@ export function ProjectCard({ project, onPreview }: ProjectCardProps) {
           <p className="text-xs text-gray-500">{buildMetaLine(project)}</p>
         </div>
 
-        <p className="text-gray-300 text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
+        <p className="text-gray-300 text-sm leading-relaxed flex-grow min-h-[4.5rem]">
+          {project.description}
+        </p>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag) => (
-            <Badge key={tag} className="bg-blue-500/10 border-blue-500/20 text-blue-300">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-
-        {hasMediaSection && (
-          <div className="mt-auto pt-4 border-t border-gray-800/60 space-y-3">
-            {isUiOnly && <div className="h-[34px]" aria-hidden="true" />}
-
-            {websiteLinks.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {websiteLinks.map((link) => (
-                  <HighlightLink key={link.url} link={link} />
-                ))}
-              </div>
-            )}
-
-            {uiSamples.length > 0 && (
-              <UiSamplePreview
-                samples={uiSamples}
-                projectName={project.name}
-                onPreview={onPreview}
-              />
-            )}
-
-            {mediaLinks.map((link) => (
-              <LinkPreview key={link.url} link={link} onPreview={onPreview} />
+        <div className="mt-auto pt-4">
+          <div className="flex flex-nowrap items-center gap-1.5 mb-4 overflow-x-auto scrollbar-thin">
+            {project.tags.map((tag) => (
+              <Badge
+                key={tag}
+                className="shrink-0 px-2.5 py-0.5 text-[11px] bg-blue-500/10 border-blue-500/20 text-blue-300"
+              >
+                {tag}
+              </Badge>
             ))}
           </div>
-        )}
+
+          {hasMediaSection && (
+            <div className="pt-4 border-t border-gray-800/60 space-y-3">
+              {isUiOnly && <div className="h-[34px]" aria-hidden="true" />}
+
+              {websiteLinks.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {websiteLinks.map((link) => (
+                    <HighlightLink key={link.url} link={link} />
+                  ))}
+                </div>
+              )}
+
+              {uiSamples.length > 0 && (
+                <UiSamplePreview
+                  samples={uiSamples}
+                  projectName={project.name}
+                  onPreview={onPreview}
+                />
+              )}
+
+              {mediaLinks.map((link) => (
+                <LinkPreview key={link.url} link={link} onPreview={onPreview} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );
