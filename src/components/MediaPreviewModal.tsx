@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 export type PreviewContent =
   | { kind: 'image'; src: string; title: string }
   | { kind: 'youtube'; videoId: string; title: string }
-  | { kind: 'embed'; src: string; title: string };
+  | { kind: 'embed'; src: string; title: string; isVertical?: boolean };
 
 interface MediaPreviewModalProps {
   content: PreviewContent | null;
@@ -59,7 +59,7 @@ export function MediaPreviewModal({ content, onClose }: MediaPreviewModalProps) 
           </button>
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-gray-700 bg-gray-900 shadow-2xl">
+        <div className="rounded-xl overflow-hidden border border-gray-700 bg-gray-900 shadow-2xl flex justify-center items-center">
           {content.kind === 'image' && (
             <img
               src={content.src}
@@ -81,11 +81,11 @@ export function MediaPreviewModal({ content, onClose }: MediaPreviewModalProps) 
           )}
 
           {content.kind === 'embed' && (
-            <div className="relative w-full aspect-video bg-black">
+            <div className="relative h-[75vh] sm:h-[80vh] aspect-[9/16] bg-black overflow-hidden flex items-center justify-center rounded-lg">
               <iframe
                 src={content.src}
                 title={content.title}
-                className="absolute inset-0 w-full h-full"
+                className="absolute border-0 w-[200%] h-[200%] origin-center scale-50"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
               />
