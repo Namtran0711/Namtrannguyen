@@ -22,12 +22,12 @@ export interface Project {
 }
 
 export const PROFILE = {
-  name: 'NGUYEN HUU THANG',
+  name: 'TRAN NGUYEN NAM',
   titles: ['Business Analyst', 'Product Owner'],
   location: 'Ho Chi Minh City, Viet Nam',
   email: 'trannguyennam.tnn@gmail.com',
   phone: '(+84) 399356368',
-  linkedin: 'NGUYEN HUU THANG',
+  linkedin: 'Tran Nguyen Nam',
   linkedinUrl: 'https://www.linkedin.com/in/trannguyennam',
   education: 'VNU | UEL - Birmingham City University',
   quote:
