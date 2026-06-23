@@ -102,7 +102,7 @@ function LinkPreview({
       <div className="space-y-2">
         <button
           type="button"
-          onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label })}
+          onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label, isVertical: link.isVertical })}
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
           <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">

@@ -7,6 +7,7 @@ export interface ProjectLink {
   label: string;
   url: string;
   type: LinkType;
+  isVertical?: boolean;
 }
 
 export interface Project {
@@ -157,6 +158,7 @@ export const PROJECTS: Project[] = [
         label: 'Demo clip',
         url: 'https://drive.google.com/file/d/10s095ibe7yXAPzPgAEp3RdfQd-OLJFF6/view?usp=sharing',
         type: 'drive',
+        isVertical: false,
       },
     ],
   },
@@ -174,6 +176,7 @@ export const PROJECTS: Project[] = [
         label: 'Demo clip',
         url: 'https://drive.google.com/file/d/1AVIXrRt0duuPgpaV3QQrxrvao56DMm0s/view?usp=sharing',
         type: 'drive',
+        isVertical: true,
       },
     ],
   },
