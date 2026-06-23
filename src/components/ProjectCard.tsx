@@ -105,8 +105,11 @@ function LinkPreview({
           onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label })}
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
-          <div className="aspect-video bg-gray-900/60 flex flex-col ithttps://namtrannguyen-git-main-trannguyennamtnn-2431s-projects.vercel.app/ems-center justify-center gap-1.5">
-            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+          <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
+            {/* Thêm thẻ div bọc ngoài kèm shrink-0 để fix lỗi Safari */}
+            <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+              <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+            </div>
             <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>
@@ -124,7 +127,9 @@ function LinkPreview({
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
           <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
-            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+            <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+              <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+            </div>
             <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>

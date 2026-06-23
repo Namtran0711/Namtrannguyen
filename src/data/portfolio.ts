@@ -27,7 +27,7 @@ export const PROFILE = {
   location: 'Ho Chi Minh City, Viet Nam',
   email: 'trannguyennam.tnn@gmail.com',
   phone: '(+84) 399356368',
-  linkedin: 'NGUYEN HUU THANG',
+  linkedin: 'TRAN NGUYEN NAM',
   linkedinUrl: 'https://www.linkedin.com/in/trannguyennam',
   education: 'VNU | UEL - Birmingham City University',
   quote:
