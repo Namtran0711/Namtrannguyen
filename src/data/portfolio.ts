@@ -22,7 +22,7 @@ export interface Project {
 }
 
 export const PROFILE = {
-  name: 'NGUYEN HUU THANG',
+  name: 'TRAN NGUYEN NAM',
   titles: ['Business Analyst', 'Product Owner'],
   location: 'Ho Chi Minh City, Viet Nam',
   email: 'trannguyennam.tnn@gmail.com',
