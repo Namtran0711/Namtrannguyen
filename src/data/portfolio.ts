@@ -153,11 +153,7 @@ export const PROJECTS: Project[] = [
     tags: ['Interactive Gaming', 'User Engagement', 'Campaign'],
     links: [
       { label: 'Detail info', url: 'https://www.facebook.com/GameThuToanNang', type: 'facebook' },
-      {
-        label: 'Demo clip',
-        url: 'https://drive.google.com/file/d/10s095ibe7yXAPzPgAEp3RdfQd-OLJFF6/view?usp=sharing',
-        type: 'drive',
-      },
+      { label: 'Demo video', url: 'https://www.tiktok.com/@gamethutoannang/video/7510482388129041665', type: 'tiktok' },
     ],
   },
   {
