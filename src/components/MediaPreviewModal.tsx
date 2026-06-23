@@ -81,12 +81,12 @@ export function MediaPreviewModal({ content, onClose }: MediaPreviewModalProps) 
           )}
 
           {content.kind === 'embed' && (
-            <div className="relative h-[75vh] sm:h-[80vh] aspect-[9/16] bg-black overflow-hidden flex items-center justify-center rounded-lg">
+          <div className="relative h-[75vh] sm:h-[80vh] aspect-[9/16] bg-black overflow-hidden flex items-center justify-center rounded-lg">
               <iframe
                 src={content.src}
                 title={content.title}
                 className="absolute border-0 w-[200%] h-[200%] origin-center scale-50"
-                allow="autoplay; encrypted-media"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </div>
