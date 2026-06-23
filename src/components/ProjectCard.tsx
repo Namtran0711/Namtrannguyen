@@ -83,7 +83,9 @@ function LinkPreview({
         <img
           src={youtubeThumb}
           alt={`${link.label} thumbnail`}
-          className="w-full aspect-video object-cover"
+          className="w-full aspect-video object-cover bg-gray-900" // Thêm màu nền tối tạm thời
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors flex items-center justify-center">
           <div className="w-10 h-10 rounded-full bg-red-600/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
@@ -170,7 +172,9 @@ function UiSamplePreview({
             <img
               src={src}
               alt={`${projectName} UI sample ${index + 1}`}
-              className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+              className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300 bg-gray-900"
+              loading="lazy"
+              decoding="async"
             />
           </button>
         ))}
