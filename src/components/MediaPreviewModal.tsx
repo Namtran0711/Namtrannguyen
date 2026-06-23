@@ -86,7 +86,7 @@ export function MediaPreviewModal({ content, onClose }: MediaPreviewModalProps) 
                 src={content.src}
                 title={content.title}
                 className="absolute border-0 w-[200%] h-[200%] origin-center scale-50"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; encrypted-media"
                 allowFullScreen
               />
             </div>
