@@ -81,19 +81,11 @@ export function MediaPreviewModal({ content, onClose }: MediaPreviewModalProps) 
           )}
 
           {content.kind === 'embed' && (
-            <div
-              className={`relative bg-black overflow-hidden flex items-center justify-center rounded-lg transition-all duration-200 ${content.isVertical
-                  ? 'h-[75vh] sm:h-[80vh] aspect-[9/16]' // Khung dọc
-                  : 'w-full aspect-video max-h-[75vh]'   // Khung ngang
-                }`}
-            >
+            <div className="relative h-[75vh] sm:h-[80vh] aspect-[9/16] bg-black overflow-hidden flex items-center justify-center rounded-lg">
               <iframe
                 src={content.src}
                 title={content.title}
-                className={`absolute border-0 ${content.isVertical
-                    ? 'w-[200%] h-[200%] origin-center scale-50' // Zoom 50% cho khung dọc
-                    : 'inset-0 w-full h-full'                    // Trải đều cho khung ngang
-                  }`}
+                className="absolute border-0 w-[200%] h-[200%] origin-center scale-50"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />

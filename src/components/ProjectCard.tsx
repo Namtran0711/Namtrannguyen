@@ -102,10 +102,10 @@ function LinkPreview({
       <div className="space-y-2">
         <button
           type="button"
-          onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label, isVertical: link.isVertical })}
+          onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label })}
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
-          <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
+          <div className="aspect-video bg-gray-900/60 flex flex-col ithttps://namtrannguyen-git-main-trannguyennamtnn-2431s-projects.vercel.app/ems-center justify-center gap-1.5">
             <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
             <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
@@ -150,9 +150,8 @@ function UiSamplePreview({
   return (
     <div className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all">
       <div
-        className={`relative w-full aspect-video overflow-hidden ${
-          samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800' : ''
-        }`}
+        className={`relative w-full aspect-video overflow-hidden ${samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800' : ''
+          }`}
       >
         {samples.map((src, index) => (
           <button
