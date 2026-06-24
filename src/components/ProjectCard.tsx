@@ -108,7 +108,10 @@ function LinkPreview({
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
           <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
-            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+            {/* Thêm thẻ div bọc ngoài kèm shrink-0 để fix lỗi Safari */}
+            <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+              <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+            </div>
             <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>
@@ -126,7 +129,9 @@ function LinkPreview({
           className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
         >
           <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
-            <Play className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors" />
+            <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+              <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+            </div>
             <span className="text-[11px] text-gray-500">{link.label}</span>
           </div>
         </button>
@@ -152,9 +157,8 @@ function UiSamplePreview({
   return (
     <div className="w-full rounded-lg border border-gray-800 bg-gray-950/40 overflow-hidden hover:border-gray-700 transition-all">
       <div
-        className={`relative w-full aspect-video overflow-hidden ${
-          samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800' : ''
-        }`}
+        className={`relative w-full aspect-video overflow-hidden ${samples.length > 1 ? 'grid grid-cols-2 divide-x divide-gray-800' : ''
+          }`}
       >
         {samples.map((src, index) => (
           <button

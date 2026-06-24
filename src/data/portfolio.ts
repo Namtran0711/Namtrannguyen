@@ -27,7 +27,7 @@ export const PROFILE = {
   location: 'Ho Chi Minh City, Viet Nam',
   email: 'trannguyennam.tnn@gmail.com',
   phone: '(+84) 399356368',
-  linkedin: 'Tran Nguyen Nam',
+  linkedin: 'TRAN NGUYEN NAM',
   linkedinUrl: 'https://www.linkedin.com/in/trannguyennam',
   education: 'VNU | UEL - Birmingham City University',
   quote:
@@ -153,7 +153,7 @@ export const PROJECTS: Project[] = [
     tags: ['Interactive Gaming', 'User Engagement', 'Campaign'],
     links: [
       { label: 'Detail info', url: 'https://www.facebook.com/GameThuToanNang', type: 'facebook' },
-      { label: 'Demo video', url: 'https://www.tiktok.com/@gamethutoannang/video/7510482388129041665', type: 'tiktok' },
+      { label: 'Demo video', url: 'https://drive.google.com/file/d/10s095ibe7yXAPzPgAEp3RdfQd-OLJFF6/view?usp=sharing', type: 'drive' },
     ],
   },
   {
