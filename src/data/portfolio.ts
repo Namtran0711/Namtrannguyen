@@ -7,6 +7,7 @@ export interface ProjectLink {
   label: string;
   url: string;
   type: LinkType;
+  thumbnail?: string;
 }
 
 export interface Project {
@@ -153,7 +154,7 @@ export const PROJECTS: Project[] = [
     tags: ['Interactive Gaming', 'User Engagement', 'Campaign'],
     links: [
       { label: 'Detail info', url: 'https://www.facebook.com/GameThuToanNang', type: 'facebook' },
-      { label: 'Demo video', url: 'https://drive.google.com/file/d/10s095ibe7yXAPzPgAEp3RdfQd-OLJFF6/view?usp=sharing', type: 'drive' },
+      { label: 'Demo video', url: 'https://drive.google.com/file/d/10s095ibe7yXAPzPgAEp3RdfQd-OLJFF6/view?usp=sharing', type: 'drive', thumbnail: '/assets/projects/tanbinhtoannang.jpg'},
     ],
   },
   {
@@ -170,6 +171,7 @@ export const PROJECTS: Project[] = [
         label: 'Demo clip',
         url: 'https://drive.google.com/file/d/1AVIXrRt0duuPgpaV3QQrxrvao56DMm0s/view?usp=sharing',
         type: 'drive',
+        thumbnail: '/assets/projects/aimusicvideo.jpg'
       },
     ],
   },

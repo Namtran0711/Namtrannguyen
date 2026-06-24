@@ -105,15 +105,35 @@ function LinkPreview({
         <button
           type="button"
           onClick={() => onPreview({ kind: 'embed', src: driveEmbed, title: link.label })}
-          className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
+          className="group relative w-full overflow-hidden rounded-lg border border-gray-800 hover:border-gray-700 transition-all text-left"
         >
-          <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
-            {/* Thêm thẻ div bọc ngoài kèm shrink-0 để fix lỗi Safari */}
-            <div className="w-8 h-8 shrink-0 flex items-center justify-center">
-              <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+          {link.thumbnail ? (
+            <>
+              <img
+                src={link.thumbnail}
+                alt={`${link.label} thumbnail`}
+                className="w-full aspect-video object-cover bg-gray-900"
+                loading="lazy"
+                decoding="async"
+              />
+              {/* Lớp overlay và icon Play giống giao diện YouTube */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-red-600/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                  <Play className="w-4 h-4 text-white ml-0.5" fill="white" />
+                </div>
+              </div>
+              <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="text-[11px] text-gray-300">{link.label}</p>
+              </div>
+            </>
+          ) : (
+            <div className="aspect-video bg-gray-900/60 flex flex-col items-center justify-center gap-1.5">
+              <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+                <Play className="w-full h-full text-gray-500 group-hover:text-gray-300 transition-colors" />
+              </div>
+              <span className="text-[11px] text-gray-500">{link.label}</span>
             </div>
-            <span className="text-[11px] text-gray-500">{link.label}</span>
-          </div>
+          )}
         </button>
         <SubtleLink link={link} />
       </div>
