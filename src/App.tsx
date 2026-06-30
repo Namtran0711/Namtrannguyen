@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Briefcase,
   ChevronRight,
@@ -19,7 +19,6 @@ import { MediaPreviewModal, PreviewContent } from './components/MediaPreviewModa
 import { ProjectCard } from './components/ProjectCard';
 import {
   EXPERIENCES,
-  getGmailComposeUrl,
   PROFILE,
   PROJECTS,
   REVIEWS,
@@ -43,12 +42,7 @@ const SKILL_ICONS = {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('experience');
-  const [isLoaded, setIsLoaded] = useState(false);
   const [preview, setPreview] = useState<PreviewContent | null>(null);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 font-sans selection:bg-cyan-500/30">
@@ -58,11 +52,7 @@ export default function App() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20">
-        <header
-          className={`transition-all duration-1000 transform ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
+        <header>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
             <div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-2">
@@ -110,11 +100,7 @@ export default function App() {
           </div>
         </header>
 
-        <div
-          className={`flex gap-1 sm:gap-2 p-1 bg-gray-900/50 rounded-xl border border-gray-800 mb-6 sm:mb-8 backdrop-blur-md overflow-x-auto scrollbar-thin transition-all duration-1000 delay-300 transform ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
+        <div className="flex gap-1 sm:gap-2 p-1 bg-gray-900/50 rounded-xl border border-gray-800 mb-6 sm:mb-8 backdrop-blur-md overflow-x-auto scrollbar-thin">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -133,11 +119,7 @@ export default function App() {
           ))}
         </div>
 
-        <main
-          className={`min-h-[400px] sm:min-h-[500px] transition-all duration-1000 delay-500 transform ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
+        <main className="min-h-[400px] sm:min-h-[500px]">
           {activeTab === 'experience' && (
             <div className="space-y-4 sm:space-y-6 animate-fade-in">
               {EXPERIENCES.map((exp) => (
@@ -261,9 +243,7 @@ export default function App() {
         <footer className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800/50">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
-              href={getGmailComposeUrl(PROFILE.email)}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${PROFILE.email}`}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/40 hover:bg-cyan-500/25 hover:text-cyan-300 hover:border-cyan-400/60 transition-all shadow-sm shadow-cyan-500/10"
             >
               <Mail className="w-4 h-4" />
@@ -271,7 +251,6 @@ export default function App() {
             </a>
             <a
               href={PROFILE.linkedinUrl}
-              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-blue-400 bg-blue-500/15 border border-blue-500/40 hover:bg-blue-500/25 hover:text-blue-300 hover:border-blue-400/60 transition-all shadow-sm shadow-blue-500/10"
             >
