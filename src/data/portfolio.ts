@@ -40,7 +40,7 @@ export const EXPERIENCES = [
     id: 1,
     company: 'Rikkei Corp',
     role: 'Business Analyst',
-    date: 'July 2025 - Present',
+    date: 'Jan 2026 - Present',
     type: 'Full-time · Hybrid',
     description: [
       'Analyze business requirements and manage product backlogs, collaborating closely with development teams to ensure accurate implementation.',
@@ -53,7 +53,7 @@ export const EXPERIENCES = [
     id: 3,
     company: 'V-Cyber',
     role: 'Business Analyst',
-    date: 'Jul 2026 - Present',
+    date: 'July 2025 - Present',
     type: 'Contractor · Remote',
     description: [
       'Collecting and analyzing business requirements from stakeholders.',
