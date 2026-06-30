@@ -35,7 +35,6 @@ function HighlightLink({ link }: { link: ProjectLink }) {
   return (
     <a
       href={link.url}
-      target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/40 hover:bg-cyan-500/25 hover:text-cyan-300 hover:border-cyan-400/60 transition-all shadow-sm shadow-cyan-500/10"
     >
@@ -49,7 +48,6 @@ function SubtleLink({ link }: { link: ProjectLink }) {
   return (
     <a
       href={link.url}
-      target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors"
     >
